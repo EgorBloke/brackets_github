@@ -1,0 +1,37 @@
+bool check(char str[], std::vector<std::pair<char, char>> brackets)
+{
+    std::stack<char> stackBrackets;
+    int i = 0;
+    bool flag;
+    while (str[i])
+    {
+
+        if (IsABracket(str[i], brackets).first == str[i])
+        {
+            stackBrackets.push(str[i]);
+        }
+        if (IsABracket(str[i], brackets).second == str[i])
+        {
+            if (stackBrackets.size() == 0)
+            {
+                return false;
+            }
+            char c = stackBrackets.top();
+            if (c == IsABracket(str[i], brackets).first)
+            {
+                stackBrackets.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        ++i;
+
+    }
+    if (stackBrackets.size() != 0)
+    {
+        return false;
+    }
+    return true;
+}
